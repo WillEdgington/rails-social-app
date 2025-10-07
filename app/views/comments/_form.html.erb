@@ -1,0 +1,11 @@
+<%= form_with(model: [commentable, comment], data: { turbo_frame: "new_comment" }) do |form| %>
+    <div class="comment-form">
+        <div class="field">
+            <%= form.text_field :body, placeholder: "Add a comment..." %>
+        </div>
+
+        <div class="submit-comment">
+            <%= form.submit "Comment" %>
+        </div>
+    </div>
+<% end %>

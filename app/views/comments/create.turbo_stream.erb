@@ -1,0 +1,7 @@
+<%= turbo_stream.prepend "comments_for_#{dom_id(@commentable)}",
+      partial: "comments/comment",
+      locals: { comment: @comment } %>
+
+<%= turbo_stream.replace "new_comment" do %>
+  <%= render "comments/form", commentable: @commentable, comment: Comment.new %>
+<% end %>

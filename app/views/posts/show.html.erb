@@ -1,0 +1,13 @@
+<%= render @post %>
+
+<div class="comment-feed">
+    <%= turbo_frame_tag "new_comment" do %>
+        <%= render "comments/form", commentable: @post, comment: Comment.new %>
+    <% end %>
+
+    <div id="comments">
+        <div id="comments_for_<%= dom_id(@post) %>">
+            <%= render @post.comments %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<turbo-frame id="<%= dom_id(post) %>">
+    <div class="post-box">
+        <div class="post-user-date">
+            <strong><%= link_to post.user.username, user_path(post.user) %></strong>
+            <small>- <%= time_ago_in_words(post.created_at) %> ago</small>
+        </div>
+
+        <div class="post-title">
+            <h2><%= simple_format(post.title) %></h2>
+        </div>
+
+        <div class="post-body">
+            <p><%= simple_format(post.body) %></p>
+        </div>
+
+        <div class="post-likes">
+            <%= render "likes/like_button", likeable: post %>
+        </div>
+    </div>
+</turbo-frame>

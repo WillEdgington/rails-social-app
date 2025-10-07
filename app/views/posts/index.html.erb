@@ -1,0 +1,11 @@
+<h1>Your Feed:</h1>
+
+<div id="posts-feed">
+    <% if @posts.any? %>
+        <% @posts.each do |post| %>
+            <%= render post %>
+        <% end %>
+    <% else %>
+        <p>There are currently no posts for you to see.</p>
+    <% end %>
+</div>

@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :passive_follows, class_name: "Follow",
                              foreign_key: "followed_id",
                              dependent: :destroy
-  has_many :requested_followers, through: :passive_followes, source: :follower
+  has_many :requested_followers, through: :passive_follows, source: :follower
 
   def following
     requested_following.merge(Follow.accepted)

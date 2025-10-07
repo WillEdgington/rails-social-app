@@ -2,7 +2,10 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # change mechanics
+    following = current_user.following.pluck(:id)
+    followed = Post.where(user_id: following + [current_user.id]).order(created_at: :desc)
+    suggested = Post.where.not(user_id: following + [current_user.id]).order(created_at: :desc)
+    @posts = feed_merge(followed.to_a, suggested.to_a)
   end
 
   def show
@@ -51,5 +54,22 @@ class PostsController < ApplicationController
   private
   def post_params
     params.require(:post).permit(:title, :body)
+  end
+
+  def feed_merge(followed, suggested, minv: 3, maxv: 10)
+    return followed if suggested.empty?
+
+    feed = []
+    unless followed.empty? || suggested.empty?
+      batch = rand(3..10)
+      feed << followed.shift(batch)
+      feed << suggested.shift
+    end
+
+    if followed.any?
+      feed << followed
+    else
+      feed << suggested
+    end
   end
 end
