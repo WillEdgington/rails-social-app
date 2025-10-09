@@ -1,0 +1,22 @@
+<div class="user-index">
+  <%= render "users/users_list",
+      title: "Following",
+      users: @following,
+      empty_message: "You are not following anyone yet.",
+      show_request: false,
+      show_unfollow: true %>
+
+  <%= render "users/users_list",
+      title: "Requests",
+      users: @pending_requests,
+      empty_message: "No pending requests.",
+      show_request: true,
+      show_unfollow: true %>
+
+  <%= render "users/users_list",
+      title: "Recommended",
+      users: @not_following,
+      empty_message: "No reccomendations available.",
+      show_request: false,
+      show_unfollow: true %>
+</div>

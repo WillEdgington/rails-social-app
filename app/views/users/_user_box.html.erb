@@ -1,0 +1,14 @@
+<div class="user-box"
+     data-controller="post-click"
+     data-post-click-url-value="<%= user_path(user) %>">
+  <div class="user-info">
+    <strong><%= user.username %></strong>
+    <div class="user-follow">
+      <%= render "users/follow_button",
+                 user: user,
+                 data_action: "click->post-click#stopPropagation",
+                 show_request: show_request,
+                 show_unfollow: show_unfollow %>
+    </div>
+  </div>
+</div>

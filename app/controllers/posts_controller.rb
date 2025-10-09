@@ -68,8 +68,9 @@ class PostsController < ApplicationController
 
     if followed.any?
       feed << followed
-    else
+    elsif suggested.any?
       feed << suggested
     end
+    feed
   end
 end

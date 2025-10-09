@@ -30,3 +30,46 @@
 .hidden {
   display: none;
 }
+
+.post-box {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: background 0.15s ease;
+}
+
+.post-box:hover {
+  background-color: #f9f9f9;
+}
+
+.user-link, .btn-like {
+  z-index: 2;
+  position: relative;
+}
+
+.follow-button, .requested-follow-button, .accept-request-button, .decline-request-button, .unfollow-button {
+  border: none;
+  background-color: #b9b7b7;
+  border-radius: 10%;
+}
+
+.follow-button:hover, .requested-follow-button:hover, .accept-request-button:hover, .decline-request-button:hover, .unfollow-button:hover {
+  box-shadow: 1px 1px 1px #8b8787;
+}
+
+.user-box {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.user-box:hover {
+  background: #fafafa;
+}

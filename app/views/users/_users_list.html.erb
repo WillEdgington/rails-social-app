@@ -1,0 +1,13 @@
+<div class="users-section">
+  <h2><%= title %></h2>
+
+  <% if users.any? %>
+    <div class="user-list">
+      <% users.each do |user| %>
+        <%= render "users/user_box", user: user, show_request: show_request, show_unfollow: show_unfollow %>
+      <% end %>
+    </div>  
+  <% else %>
+    <p><%= empty_message %></p>
+  <% end %>
+</div>

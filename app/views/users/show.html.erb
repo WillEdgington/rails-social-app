@@ -1,0 +1,29 @@
+<div class="user-show">
+  <div class="user-name">
+    <h2><%= @user.username %></h2>
+    <%= render "users/follow_button", user: @user, show_unfollow: true %>
+    <% if current_user == @user %>
+      <%= link_to "Edit Profile", edit_user_registration_path %>
+    <% end %>
+  </div>
+
+  <div class="user-stats">
+    <p><strong>Followers: </strong><%= @user.followers.count %></p>
+    <p><strong>Following: </strong><%= @user.following.count %></p>
+    <p><strong>Posts: </strong><%= @user.posts.count %></p>
+  </div>
+
+  <div class="user-posts">
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <%= render post, user_links: false %>
+      <% end %>
+    <% else %>
+      <% if current_user == @user %>
+        <p>Get started and <%= link_to "create a post!", new_post_path(current_user) %></p>
+      <% else %>
+        <p><%= @user.username %> has not created any posts.</p>
+      <% end %>
+    <% end %>
+  </div>
+</div>

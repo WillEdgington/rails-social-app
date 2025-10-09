@@ -1,3 +1,18 @@
 <turbo-frame id="like_button_<%= dom_id(likeable) %>">
-
+  <% if likeable.persisted? %>
+    <% if current_user.likes.exists?(likeable: likeable) %>
+      <% like = current_user.likes.find_by(likeable: likeable) %>
+      <%= button_to "❤️ #{likeable.likes.count}",
+                    polymorphic_path([likeable, like]),
+                    method: :delete,
+                    data: { turbo_stream: true },
+                    class: "btn btn-like liked" %>
+    <% else %>
+      <%= button_to "🤍 #{likeable.likes.count}",
+                    polymorphic_path([likeable, :likes]),
+                    method: :post,
+                    data: { turbo_stream: true },
+                    class: "btn btn-like" %>
+    <% end %>
+  <% end %>
 </turbo-frame>

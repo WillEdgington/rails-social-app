@@ -1,20 +1,38 @@
 <turbo-frame id="<%= dom_id(post) %>">
-    <div class="post-box">
-        <div class="post-user-date">
-            <strong><%= link_to post.user.username, user_path(post.user) %></strong>
-            <small>- <%= time_ago_in_words(post.created_at) %> ago</small>
-        </div>
-
-        <div class="post-title">
-            <h2><%= simple_format(post.title) %></h2>
-        </div>
-
-        <div class="post-body">
-            <p><%= simple_format(post.body) %></p>
-        </div>
-
-        <div class="post-likes">
-            <%= render "likes/like_button", likeable: post %>
-        </div>
+  <div class="post-box" 
+    <% if local_assigns[:clickable] != false %>
+      data-controller="post-click"
+      data-post-click-url-value="<%= post_path(post) %>"
+      style="cursor: pointer"
+    <% end %>
+  >
+    <div class="post-user-date">
+      <% if local_assigns[:user_links] != false %>
+        <strong>
+            <%= link_to post.user.username, user_path(post.user), 
+                      data: { turbo_frame: "_top", action: "click->post-click#stopPropagation" }, 
+                      class: "user-link" %>
+        </strong>
+        <small>
+            - <%= time_ago_in_words(post.created_at) %> ago 
+            <%= render "users/follow_button", user: post.user, data_action: "click->post-click#stopPropagation" %>
+        </small>
+      <% else %>
+        <strong><%= post.user.username %></strong>
+        <small>- <%= time_ago_in_words(post.created_at) %> ago</small>
+      <% end %>
     </div>
+
+    <div class="post-title">
+      <h2><%= simple_format(post.title) %></h2>
+    </div>
+
+    <div class="post-body">
+      <p><%= simple_format(post.body) %></p>
+    </div>
+
+    <div class="post-likes" data-action="click->post-click#stopPropagation">
+      <%= render "likes/like_button", likeable: post %>
+    </div>
+  </div>
 </turbo-frame>

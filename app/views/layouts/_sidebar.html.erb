@@ -3,7 +3,7 @@
         <li><%= link_to "Home", posts_path %></li>
         <li><%= link_to "Discover", users_path %></li>
         <li><%= link_to "Profile", user_path(current_user) if user_signed_in? %></li>
-        <li><%= link_to "Create Post", new_post_path(current_user) %>
+        <li><%= link_to "Create Post", new_post_path(current_user) %></li>
 
         <% if user_signed_in? %>
             <li>
@@ -11,7 +11,7 @@
             </li>
         <% else %>
             <li>
-                <%= link_to "Log In", new_user_seesion_path %>
+                <%= link_to "Log In", new_user_session_path %>
             </li>
         <% end %>
     </ul>
