@@ -18,6 +18,9 @@ class User < ApplicationRecord
                              dependent: :destroy
   has_many :requested_followers, through: :passive_follows, source: :follower
 
+  has_one_attached :avatar
+  validate :acceptable_avatar
+
   def following
     requested_following.merge(Follow.accepted)
   end
@@ -28,5 +31,19 @@ class User < ApplicationRecord
 
   def pending_follow_requests
     passive_follows.pending
+  end
+
+  private
+
+  def acceptable_avatar
+    return unless avatar.attached?
+
+    unless avatar.blob.content_type.start_with?("image/")
+      errors.add(:avatar, "must be an image")
+    end
+
+    if avatar.blob.byte_size > 5.megabytes
+      errors.add(:avatar, "is too big (max 5MB)")
+    end
   end
 end

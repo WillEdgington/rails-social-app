@@ -1,6 +1,9 @@
 <div class="user-box"
      data-controller="post-click"
      data-post-click-url-value="<%= user_path(user) %>">
+  <div class="user-avatar">
+    <%= profile_image_for(user, size: 40) %>
+  </div>
   <div class="user-info">
     <strong><%= user.username %></strong>
     <div class="user-follow">

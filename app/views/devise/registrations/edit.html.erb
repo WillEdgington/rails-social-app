@@ -36,6 +36,17 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+  <div class="field">
+    <%= f.label :avatar, "Profile photo" %><br>
+    <%= f.file_field :avatar, accept: "image/*" %>
+
+    <% if resource.avatar.attached? && resource.avatar.blob.persisted? %>
+      <div class="current-avatar">
+        <%= image_tag resource.avatar.variant(resize_to_fill: [100, 100]), class: "profile-pic-preview" %>
+      </div>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>

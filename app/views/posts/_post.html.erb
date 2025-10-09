@@ -7,6 +7,9 @@
     <% end %>
   >
     <div class="post-user-date">
+      <div class="user-avatar">
+        <%= profile_image_for(post.user, size: 40) %>
+      </div>
       <% if local_assigns[:user_links] != false %>
         <strong>
             <%= link_to post.user.username, user_path(post.user), 

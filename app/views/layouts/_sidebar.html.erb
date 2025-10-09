@@ -1,18 +1,21 @@
 <div class="sidebar">
-    <ul>
-        <li><%= link_to "Home", posts_path %></li>
-        <li><%= link_to "Discover", users_path %></li>
-        <li><%= link_to "Profile", user_path(current_user) if user_signed_in? %></li>
-        <li><%= link_to "Create Post", new_post_path(current_user) %></li>
+  <div class="sidebar-header">
+    <p>Rails Social</p>
+  </div>
+  <ul class="sidebar-menu">
+    <li><i class="fa-solid fa-house"></i><%= link_to "Home", posts_path %></li>
+    <li><i class="fa-solid fa-users"></i><%= link_to "Discover", users_path %></li>
+    <li><%= profile_image_for(current_user, size: 20) %><%= link_to "Profile", user_path(current_user) if user_signed_in? %></li>
+    <li><i class="fa-solid fa-pen"></i><%= link_to "Create Post", new_post_path(current_user) %></li>
 
-        <% if user_signed_in? %>
-            <li>
-                <%= button_to "Sign Out", destroy_user_session_path, method: :delete, data: { turbo_confirm: "Are you sure you want to sign out?" } %>
-            </li>
-        <% else %>
-            <li>
-                <%= link_to "Log In", new_user_session_path %>
-            </li>
-        <% end %>
-    </ul>
+    <% if user_signed_in? %>
+      <li>
+        <%= button_to "Sign Out", destroy_user_session_path, method: :delete, data: { turbo_confirm: "Are you sure you want to sign out?" } %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to "Log In", new_user_session_path %>
+      </li>
+    <% end %>
+  </ul>
 </div>

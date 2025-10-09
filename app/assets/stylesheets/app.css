@@ -71,5 +71,17 @@
 }
 
 .user-box:hover {
-  background: #fafafa;
+  background: #f9f9f9;
 }
+
+.profile-image {
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
+}
+.profile-pic-preview {
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 0.5rem;
+}
+
