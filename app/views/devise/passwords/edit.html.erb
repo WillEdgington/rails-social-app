@@ -1,25 +1,38 @@
-<h2>Change your password</h2>
+<div class="auth-form-container password-reset">
+  <h2>Reset Your Password</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
-
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name),
+               html: { method: :put }) do |f| %>
+    <%= f.hidden_field :reset_password_token %>
+    <% if resource.errors.any? %>
+      <div class="form-error-summary">
+        <h4><%= pluralize(resource.errors.count, "error") %> prevented this password reset:</h4>
+        <ul>
+          <% resource.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="form-field">
+      <%= f.label :password, "New Password", class: "form-label" %>
+      <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-textfield" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+    <div class="form-field">
+      <%= f.label :password_confirmation, "Confirm New Password", class: "form-label" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-textfield" %>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <div class="form-actions">
+      <%= f.submit "Change My Password", class: "form-submit-btn" %>
+    </div>
+  <% end %>
+
+  <hr class="form-divider">
+
+  <div class="extra-links">
+    <%= link_to "Back to Log In", new_session_path(resource_name), class: "text-link" %>
+  </div>
+</div>
