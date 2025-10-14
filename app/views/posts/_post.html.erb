@@ -7,31 +7,36 @@
     <% end %>
   >
     <div class="post-user-date">
-      <div class="user-avatar">
-        <%= profile_image_for(post.user, size: 40) %>
+      <div class="post-user-info">
+        <% if local_assigns[:user_links] != false %>
+          <%= link_to user_path(post.user), data: { turbo_frame: "_top", action: "click->post-click#stopPropagation" }, class: "user-link" do %>
+            <span class="user-avatar">
+              <%= profile_image_for(post.user, size: 40) %>
+            </span>
+            <strong><%= post.user.username %></strong>
+          <% end %>
+        <% else %>
+          <span class="user-avatar"><%= profile_image_for(post.user, size: 40) %></span>
+          <strong><%= post.user.username %></strong>
+        <% end %>
       </div>
-      <% if local_assigns[:user_links] != false %>
-        <strong>
-            <%= link_to post.user.username, user_path(post.user), 
-                      data: { turbo_frame: "_top", action: "click->post-click#stopPropagation" }, 
-                      class: "user-link" %>
-        </strong>
+
+      <div class="post-date-follow">
         <small>
-            - <%= time_ago_in_words(post.created_at) %> ago 
-            <%= render "users/follow_button", user: post.user, data_action: "click->post-click#stopPropagation" %>
+          <%= time_ago_in_words(post.created_at) %> ago
         </small>
-      <% else %>
-        <strong><%= post.user.username %></strong>
-        <small>- <%= time_ago_in_words(post.created_at) %> ago</small>
-      <% end %>
+        <% if local_assigns[:user_links] != false %>
+          <%= render "users/follow_button", user: post.user, data_action: "click->post-click#stopPropagation" %>
+        <% end %>
+      </div>
     </div>
 
     <div class="post-title">
       <h2><%= simple_format(post.title) %></h2>
     </div>
 
-    <div class="post-body">
-      <p><%= simple_format(post.body) %></p>
+    <div class="post-body <%= 'truncated' if local_assigns[:truncate_body]==true %>">
+      <p><%= post.body.gsub(/\r?\n/, "<br>").html_safe %></p>
     </div>
 
     <div class="post-likes" data-action="click->post-click#stopPropagation">

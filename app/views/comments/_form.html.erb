@@ -1,11 +1,14 @@
-<%= form_with(model: [commentable, comment], data: { turbo_frame: "new_comment" }) do |form| %>
-    <div class="comment-form">
-        <div class="field">
-            <%= form.text_field :body, placeholder: "Add a comment..." %>
+<%= form_with(model: [commentable, comment], 
+              data: { turbo_frame: "new_comment", controller: "comment-form", action: "turbo:submit-end->comment-form#handleSubmit" }) do |form| %>
+    <div class="comment-form <%= commentable.is_a?(Post) ? 'post-comment-form' : 'reply-comment-form' %>">
+        <div class="comment-input">
+            <%= form.text_field :body, 
+            placeholder: commentable.is_a?(Post) ? "Write a comment..." : "Write a reply...",
+            class: "comment-input-field" %>
         </div>
 
-        <div class="submit-comment">
-            <%= form.submit "Comment" %>
+        <div class="comment-submit">
+            <%= form.submit "Comment", class: "comment-submit-btn" %>
         </div>
     </div>
 <% end %>

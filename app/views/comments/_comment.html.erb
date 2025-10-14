@@ -1,47 +1,48 @@
-<turbo-frame id="<%= dom_id(comment) %>">
-    <div class="comment-box" data-controller="comment-toggle">
-        <div class="comment-user-date">
-            <%= profile_image_for(comment.user, size: 20) %>
-            <strong><%= link_to comment.user.username, user_path(comment.user), data: { turbo_frame: "_top" }, class: "user-link" %></strong>
-            <small><%= time_ago_in_words(comment.created_at) %> ago</small>
-        </div>
-
-        <div class="comment-body">
-            <p><%= simple_format(comment.body) %></p>
-        </div>
-
-        <div class="comment-actions">
-            <%= render "likes/like_button", likeable: comment %>
-
-            <%= link_to "Reply", "#", 
-                        class: "reply-button",
-                        data: { action: "click->comment-toggle#toggleReply" } %>
-            
-            <% if comment.comments.any? %>
-                <%= link_to "See replies (#{comment.comments.count})", "#",
-                            class: "reveal-replies-button",
-                            data: { action: "click->comment-toggle#toggleReplies" } %>
-            <% end %>
-
-            <% if comment.user == current_user %>
-                <%= link_to "Delete",
-                    polymorphic_path([comment.commentable, comment]),
-                    data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-                    class: "text-red-500 text-sm" %>
-            <% end %>
-        </div>
-
-        <div data-comment-toggle-target="replyForm" class="hidden">
-            <%= render "comments/form", commentable: comment, comment: Comment.new %>
-        </div>
-        
-        <% if comment.comments.any? %>
-            <div data-comment-toggle-target="replies" class="hidden pl-4 mt-2 border-l">
-                <div id="comments_for_<%= dom_id(comment) %>">
-                    <%= render comment.comments %>
-                </div>
-            </div>
-        <% end %>
-
+<turbo-frame id="<%= dom_id(comment) %>"> 
+  <div class="comment-container" data-controller="comment-toggle">
+    <div class="comment-header">
+      <%= link_to user_path(comment.user), data: { turbo_frame: "_top" }, class: "comment-user-link" do %>
+        <%= profile_image_for(comment.user, size: 24) %>
+        <strong><%= comment.user.username %></strong>
+      <% end %>
+      <small class="comment-timestamp"><%= time_ago_in_words(comment.created_at) %> ago</small>
     </div>
+
+    <div class="comment-content">
+      <p><%= simple_format(comment.body) %></p>
+    </div>
+
+    <div class="comment-footer">
+      <%= render "likes/like_button", likeable: comment %>
+
+      <%= link_to "Reply", "#",
+                  class: "comment-reply-btn",
+                  data: { action: "click->comment-toggle#toggleReply" } %>
+      
+      <% if comment.comments.any? %>
+        <%= link_to "View replies (#{comment.comments.count})", "#",
+                    class: "comment-replies-toggle-btn",
+                    data: { action: "click->comment-toggle#toggleReplies" } %>
+      <% end %>
+
+      <% if comment.user == current_user %>
+        <%= link_to "Delete",
+            polymorphic_path([comment.commentable, comment]),
+            data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+            class: "comment-delete-btn" %>
+      <% end %>
+    </div>
+
+    <div data-comment-toggle-target="replyForm" class="comment-reply-form hidden">
+      <%= render "comments/form", commentable: comment, comment: Comment.new %>
+    </div>
+    
+    <% if comment.comments.any? %>
+      <div data-comment-toggle-target="replies" class="comment-thread hidden">
+        <div id="comments_for_<%= dom_id(comment) %>">
+          <%= render comment.comments %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </turbo-frame>

@@ -1,9 +1,11 @@
-<h1>Your Feed:</h1>
+<div class="feed-header">
+  <h1><i class="fa-solid fa-house"></i> Your Feed</h1>
+</div>
 
-<div id="posts-feed">
+<div class="posts-feed">
   <% if @posts.any? %>
     <% @posts.each do |post| %>
-      <%= render post %>
+      <%= render post, truncate_body: true%>
     <% end %>
   <% else %>
     <p>There are currently no posts for you to see.</p>
