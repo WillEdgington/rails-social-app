@@ -11,9 +11,12 @@
   border-radius: 10px;
   border: 1px solid #ddd;
   padding: 1.2rem 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  transition: all 0.25s ease
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .user-box:hover {
@@ -22,11 +25,30 @@
   background-color: #f9f9ff;
 }
 
+.user-box-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-name {
+  font-size: 1.05rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.user-box-follow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 .profile-image {
   border-radius: 50%;
   object-fit: cover;
   vertical-align: middle;
 }
+
 .profile-pic-preview {
   border-radius: 50%;
   object-fit: cover;
@@ -35,7 +57,9 @@
 
 .follow-button,
 .requested-follow-button,
-.unfollow-button {
+.unfollow-button,
+.decline-request-button,
+.accept-request-button {
   font-size: 0.8rem;
   padding: 0.25rem 0.5rem;
   border-radius: 6px;
@@ -46,6 +70,19 @@
   transition: background-color 0.2s;
 }
 
-.follow-button:hover {
+.follow-button:hover,
+.requested-follow-button:hover,
+.unfollow-button:hover,
+.decline-request-button:hover,
+.accept-request-button:hover {
   background-color: #e6e6e6;
 }
+
+.accept-decline-action {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* profile page */
+

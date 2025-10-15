@@ -1,17 +1,18 @@
 <div class="user-box"
      data-controller="post-click"
-     data-post-click-url-value="<%= user_path(user) %>">
-  <span class="user-avatar">
+     data-post-click-url-value="<%= user_path(user) %>"
+     style="cursor: pointer">
+  
+  <div class="user-box-info">
     <%= profile_image_for(user, size: 40) %>
-  </span>
-  <p class="user-info">
-    <strong><%= user.username %></strong>
-    <div class="user-follow">
-      <%= render "users/follow_button",
-                 user: user,
-                 data_action: "click->post-click#stopPropagation",
-                 show_request: show_request,
-                 show_unfollow: show_unfollow %>
-    </div>
-  </p>
+    <strong class="user-name"><%= user.username %></strong>
+  </div>
+
+  <div class="user-box-follow" data-action="click->post-click#stopPropagation">
+    <%= render "users/follow_button",
+              user: user,
+              data_action: "click->post-click#stopPropagation",
+              show_request: show_request,
+              show_unfollow: show_unfollow %>
+  </div>
 </div>

@@ -76,8 +76,41 @@
   -webkit-box-orient: vertical;
 }
 
-.post-likes {
-  margin-top: 0.8rem;
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.post-owner-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.like-button i,
+.post-owner-actions i {
+  font-size: 1.1rem;
+  color: #222222e8;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.post-edit-btn i:hover {
+  color: #2563eb; /* blue */
+  transform: scale(1.15);
+}
+
+.post-delete-btn i:hover {
+  color: #dc2626; /* red */
+  transform: scale(1.15);
+}
+
+button.post-delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
 
 a, a:visited {
@@ -95,47 +128,4 @@ a:hover {
 
 .post-box[data-controller="post-click"]:hover h2 {
   color: #30304e;
-}
-
-.feed-header {
-  display: flex;
-  background-color: #ffffff;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem 1rem;
-  border-bottom: 1px solid #e2e8f0;
-  margin-bottom: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.feed-header h1 {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 1.9rem;
-  font-weight: 600;
-  color: #222222f1;
-}
-
-/* post form */
-
-.new-post-header, .edit-post-header {
-  display: flex;
-  background-color: #ffffff;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem 1rem;
-  border-bottom: 1px solid #e2e8f0;
-  margin-bottom: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.new-post-header h1, .edit-post-header h1 {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 1.9rem;
-  font-weight: 600;
-  color: #222222f1;
-  /* margin: 0rem auto; */
 }

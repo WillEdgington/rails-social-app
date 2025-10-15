@@ -1,5 +1,5 @@
 <div class="posts-show">
-  <%= render @post, clickable: false %>
+  <%= render @post, clickable: false, edit_option: true %>
 
   <div class="comment-feed">
     <%= turbo_frame_tag "new_comment" do %>

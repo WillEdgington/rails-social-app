@@ -4,7 +4,7 @@
       <div class="user-avatar">
         <%= profile_image_for(@user, size: 100) %>
       </div>
-      <div class="user-name">
+      <div class="profile-user-name">
         <h2><%= @user.username %></h2>
         <%= render "users/follow_button", user: @user, show_unfollow: true %>
         <% if current_user == @user %>
@@ -23,7 +23,7 @@
   <div class="user-posts">
     <% if @posts.any? %>
       <% @posts.each do |post| %>
-        <%= render post, user_links: false, truncate_body: true %>
+        <%= render post, user_links: false, truncate_body: true, edit_option: true %>
       <% end %>
     <% else %>
       <% if current_user == @user %>

@@ -1,17 +1,18 @@
 <turbo-frame id="<%= dom_id(user, :follow_button) %>">
   <% if current_user.pending_follow_requests.exists?(follower_id: user.id) && local_assigns[:show_request] != false %>
-    <%= button_to "Accept",
-                  accept_follow_user_path(user),
-                  method: :post,
-                  data: { turbo_stream: true, action: local_assigns[:data_action] },
-                  class: "accept-request-button" %>
+    <div class="accept-decline-action">
+      <%= button_to "Accept",
+                    accept_follow_user_path(user),
+                    method: :post,
+                    data: { turbo_stream: true, action: local_assigns[:data_action] },
+                    class: "accept-request-button" %>
 
-    <%= button_to "Decline",
-                  reject_follow_user_path(user),
-                  method: :delete,
-                  data: { turbo_stream: true, action: local_assigns[:data_action] },
-                  class: "decline-request-button" %>
-
+      <%= button_to "Decline",
+                    reject_follow_user_path(user),
+                    method: :delete,
+                    data: { turbo_stream: true, action: local_assigns[:data_action] },
+                    class: "decline-request-button" %>
+    </div>
   <% elsif current_user.active_follows.exists?(followed: user, status: :pending) %>
     <%= button_to "Requested",
                   follow_user_path(user),
