@@ -46,13 +46,17 @@
 
       <% if current_user == post.user && local_assigns[:edit_option] == true %>
         <div class="post-owner-actions">
-          <%= link_to edit_post_path(post), class: "post-edit-btn", title: "Edit" do %>
+          <%= link_to edit_post_path(post), 
+              data: { turbo: false },
+              class: "post-edit-btn", 
+              title: "Edit" do %>
             <i class="fa-solid fa-pen"></i>
           <% end %>
 
           <%= button_to post_path(post),
               method: :delete,
-              data: { turbo_confirm: "Delete post?" },
+              data: { turbo: false },
+              onclick: "return confirm('Delete this post?');",
               class: "post-delete-btn",
               title: "Delete Post" do %>
             <i class="fa-solid fa-trash"></i>

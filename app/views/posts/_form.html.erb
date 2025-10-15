@@ -1,5 +1,5 @@
 <div class="form-container">
-  <%= form_with(model: post) do |form| %>
+  <%= form_with(model: post, data: { turbo: false }) do |form| %>
     <div class="post-form">
       <div class="form-field">
         <%= form.label :title, class: "form-label" %>

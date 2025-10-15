@@ -24,7 +24,7 @@
                   follow_user_path(user),
                   method: :post,
                   data: { turbo_stream: true, action: local_assigns[:data_action] },
-                  class: "follow-button" %>
+                  class: "follow-btn" %>
   <% elsif current_user != user && local_assigns[:show_unfollow] == true %>
     <%= button_to "Unfollow",
                   unfollow_user_path(user),

@@ -55,7 +55,7 @@
   margin-top: 0.5rem;
 }
 
-.follow-button,
+.follow-btn,
 .requested-follow-button,
 .unfollow-button,
 .decline-request-button,
@@ -70,7 +70,7 @@
   transition: background-color 0.2s;
 }
 
-.follow-button:hover,
+.follow-btn:hover,
 .requested-follow-button:hover,
 .unfollow-button:hover,
 .decline-request-button:hover,

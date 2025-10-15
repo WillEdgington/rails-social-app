@@ -23,7 +23,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to @post, notice: "Post created."
     else
-      redirect_to :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -34,10 +34,10 @@ class PostsController < ApplicationController
   def update
     @post = current_user.posts.find(params[:id])
 
-    if @post.save
+    if @post.update(post_params)
       redirect_to @post, notice: "Post updated."
     else
-      redirect_to :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -47,7 +47,13 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to :root, notice: "Post deleted." }
+      format.html do
+        if request.referer&.include?(user_path(current_user))
+          redirect_to user_path(current_user), notice: "Post deleted."
+        else
+          redirect_to posts_path, notice: "Post deleted."
+        end
+      end
     end
   end
 
