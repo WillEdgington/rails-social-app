@@ -34,7 +34,7 @@
 .user-name {
   font-size: 1.05rem;
   color: #1f2937;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .user-box-follow {
@@ -86,3 +86,75 @@
 
 /* profile page */
 
+.users-show {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.users-show-box {
+  background: #ffffff;
+  width: 100%;
+  text-align: center;
+  padding: 3rem 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.user-avatar img {
+  margin-bottom: 1rem;
+  border: 3px solid #f3f4f6;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.profile-user-name h2 {
+  font-size: 1.6rem;
+  color: #11161b;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.user-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.user-actions form button,
+.user-actions a {
+  padding: 0.45rem 1rem;
+  /* font-size: 0.9rem; */
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+/* .edit-profile-btn {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.edit-profile-btn:hover {
+  background-color: #d1d5db;
+} */
+
+.user-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+  color: #18232e;
+  font-size: 0.95rem;
+}
+
+.user-stats strong {
+  color: #18232e;
+  font-weight: 700;
+}
+
+.user-posts {
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 1rem 2rem;
+}

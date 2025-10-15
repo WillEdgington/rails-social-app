@@ -1,26 +1,29 @@
 <div class="users-show">
-  <div class="user-show-box">
-    <div class="user-show-info">
-      <div class="user-avatar">
-        <%= profile_image_for(@user, size: 100) %>
-      </div>
-      <div class="profile-user-name">
-        <h2><%= @user.username %></h2>
+  <section class="users-show-box">
+    <div class="user-avatar">
+      <%= profile_image_for(@user, size: 120) %>
+    </div>
+
+    <div class="profile-user-name">
+      <h2><%= @user.username %></h2>
+
+      <div class="user-actions">
         <%= render "users/follow_button", user: @user, show_unfollow: true %>
+
         <% if current_user == @user %>
-          <%= link_to "Edit Profile", edit_user_registration_path %>
+          <%= link_to "Edit Profile", edit_user_registration_path, class: "edit-profile-btn" %>
         <% end %>
       </div>
-
-      <div class="user-stats">
-        <span><strong>Followers: </strong><%= @user.followers.count %></span>
-        <span><strong>Following: </strong><%= @user.following.count %></span>
-        <span><strong>Posts: </strong><%= @user.posts.count %></span>
-      </div>
     </div>
-  </div>
 
-  <div class="user-posts">
+    <div class="user-stats">
+      <span><strong>Followers: </strong><%= @user.followers.count %></span>
+      <span><strong>Following: </strong><%= @user.following.count %></span>
+      <span><strong>Posts: </strong><%= @user.posts.count %></span>
+    </div>
+  </section>
+
+  <section class="user-posts">
     <% if @posts.any? %>
       <% @posts.each do |post| %>
         <%= render post, user_links: false, truncate_body: true, edit_option: true %>
@@ -32,5 +35,5 @@
         <p><%= @user.username %> has not created any posts.</p>
       <% end %>
     <% end %>
-  </div>
+  </section>
 </div>

@@ -10,13 +10,13 @@
       <div class="post-user-info">
         <% if local_assigns[:user_links] != false %>
           <%= link_to user_path(post.user), data: { turbo_frame: "_top", action: "click->post-click#stopPropagation" }, class: "user-link" do %>
-            <span class="user-avatar">
+            <span class="post-user-avatar">
               <%= profile_image_for(post.user, size: 40) %>
             </span>
             <strong><%= post.user.username %></strong>
           <% end %>
         <% else %>
-          <span class="user-avatar"><%= profile_image_for(post.user, size: 40) %></span>
+          <span class="post-user-avatar"><%= profile_image_for(post.user, size: 40) %></span>
           <strong><%= post.user.username %></strong>
         <% end %>
       </div>
