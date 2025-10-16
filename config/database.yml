@@ -80,21 +80,26 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+# production:
+#   primary: &primary_production
+#     <<: *default
+#     database: rails_social_app_production
+#     username: rails_social_app
+#     password: <%= ENV["RAILS_SOCIAL_APP_DATABASE_PASSWORD"] %>
+#   cache:
+#     <<: *primary_production
+#     database: rails_social_app_production_cache
+#     migrations_paths: db/cache_migrate
+#   queue:
+#     <<: *primary_production
+#     database: rails_social_app_production_queue
+#     migrations_paths: db/queue_migrate
+#   cable:
+#     <<: *primary_production
+#     database: rails_social_app_production_cable
+#     migrations_paths: db/cable_migrate
+
 production:
-  primary: &primary_production
-    <<: *default
-    database: rails_social_app_production
-    username: rails_social_app
-    password: <%= ENV["RAILS_SOCIAL_APP_DATABASE_PASSWORD"] %>
-  cache:
-    <<: *primary_production
-    database: rails_social_app_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: rails_social_app_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: rails_social_app_production_cable
-    migrations_paths: db/cable_migrate
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] || "postgres://localhost/rails_social_app_production" %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
