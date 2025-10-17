@@ -4,6 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :username, presence: true,
+                       uniqueness: { case_sensitive: false },
+                       length: { minimum: 3, maximum: 15 },
+                       format: { with: /\A[a-zA-Z0-9_]+\z/, message: "can only contain letters, numbers and underscores" }
+  
+  before_save :downcase_username
+
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -34,6 +41,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def downcase_username
+    self.username = username.downcase
+  end
 
   def acceptable_avatar
     return unless avatar.attached?
