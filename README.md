@@ -1,6 +1,6 @@
 # Rails Social — A Full-Stack Social Media Web Application
 
-[Click here](https://rails-social-app.onrender.com) to checkout the application deployed on Render!
+[Click here](https://rails-social-app.onrender.com) to checkout the application deployed on Render! (currently down)
 
 This is a full-stack social media web application built with **Ruby on Rails 8**, **Hotwire (Turbo + Stimulus)**, and **PostgreSQL**.  
 It allows users to create posts, follow others, like and comment on content, and manage their profiles — all within a clean and responsive interface.
